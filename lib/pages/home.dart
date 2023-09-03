@@ -97,7 +97,14 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                       GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Coming soon...'),
+                                duration: Duration(seconds: 1),
+                              ),
+                            );
+                          },
                           child: SvgPicture.asset(
                             'assets/icons/button.svg',
                             width: 30,

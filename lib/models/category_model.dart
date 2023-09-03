@@ -31,7 +31,7 @@ class CategoryModel {
 
     categories.add(CategoryModel(
         name: 'Smoothies',
-        iconPath: 'assets/icons/plate.svg',
+        iconPath: 'assets/icons/smoothie.svg',
         boxColor: Color(0xffC58BF2)));
 
     return categories;
