@@ -19,6 +19,15 @@ class HomePage extends StatelessWidget {
     popularDiets = PopularDietsModel.getPopularDiets();
   }
 
+  void _showSnackBar(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Coming soon...'),
+        duration: Duration(seconds: 1),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     _getInitialInfo();
@@ -97,14 +106,7 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                       GestureDetector(
-                          onTap: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('Coming soon...'),
-                                duration: Duration(seconds: 1),
-                              ),
-                            );
-                          },
+                          onTap: () => _showSnackBar(context),
                           child: SvgPicture.asset(
                             'assets/icons/button.svg',
                             width: 30,
@@ -189,31 +191,33 @@ class HomePage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Container(
-                      height: 45,
-                      width: 130,
-                      child: Center(
-                        child: Text(
-                          'View',
-                          style: TextStyle(
-                              color: diets[index].viewIsSelected
-                                  ? Colors.white
-                                  : const Color(0xffC58BF2),
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14),
-                        ),
-                      ),
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(colors: [
-                            diets[index].viewIsSelected
-                                ? const Color(0xff9DCEFF)
-                                : Colors.transparent,
-                            diets[index].viewIsSelected
-                                ? const Color(0xff92A3FD)
-                                : Colors.transparent,
-                          ]),
-                          borderRadius: BorderRadius.circular(50)),
-                    )
+                    GestureDetector(
+                        onTap: () => _showSnackBar(context),
+                        child: Container(
+                          height: 45,
+                          width: 130,
+                          child: Center(
+                            child: Text(
+                              'View',
+                              style: TextStyle(
+                                  color: diets[index].viewIsSelected
+                                      ? Colors.white
+                                      : const Color(0xffC58BF2),
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14),
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(colors: [
+                                diets[index].viewIsSelected
+                                    ? const Color(0xff9DCEFF)
+                                    : Colors.transparent,
+                                diets[index].viewIsSelected
+                                    ? const Color(0xff92A3FD)
+                                    : Colors.transparent,
+                              ]),
+                              borderRadius: BorderRadius.circular(50)),
+                        ))
                   ],
                 ),
               );
@@ -255,32 +259,35 @@ class HomePage extends StatelessWidget {
                     width: 25,
                   ),
               itemBuilder: (context, index) {
-                return Container(
-                  width: 100,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: categories[index].boxColor.withOpacity(0.3)),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                        width: 50,
-                        height: 50,
-                        decoration: const BoxDecoration(
-                            color: Colors.white, shape: BoxShape.circle),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SvgPicture.asset(categories[index].iconPath),
+                return GestureDetector(
+                  onTap: () => _showSnackBar(context),
+                  child: Container(
+                    width: 100,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: categories[index].boxColor.withOpacity(0.3)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          width: 50,
+                          height: 50,
+                          decoration: const BoxDecoration(
+                              color: Colors.white, shape: BoxShape.circle),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SvgPicture.asset(categories[index].iconPath),
+                          ),
                         ),
-                      ),
-                      Text(
-                        categories[index].name,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black,
-                            fontSize: 14),
-                      )
-                    ],
+                        Text(
+                          categories[index].name,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black,
+                              fontSize: 14),
+                        )
+                      ],
+                    ),
                   ),
                 );
               }),
